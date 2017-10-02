@@ -38,4 +38,6 @@ void loop() {
   Serial.print("Joy1 Position: ");
   Serial.print(Joy1Pos);
   Serial.println(" ");
+
+  delay(1000);
 }
