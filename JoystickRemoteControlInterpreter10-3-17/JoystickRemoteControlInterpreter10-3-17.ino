@@ -8,8 +8,8 @@ int Ain0 = 0;
 int Ain1 = 0;
 float Volt0Reading;
 float Volt1Reading;
-float Joy0Pos;
-float Joy1Pos;
+int Joy0Pos;
+int Joy1Pos;
 
 void setup() {
   Serial.begin(9600);
