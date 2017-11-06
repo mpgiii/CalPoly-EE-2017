@@ -4,6 +4,8 @@
  * EE 151-03
  */
 
+#include "Servo.h"
+
 const int RangeTriggerPin = A5; // Rangefinder Trigger input pin 
 const int RangeEchoPin = A4; // Rangefinder Echo Sensor output pin
 const int motorA1 = 6; // IN A1 or IN1 (Motor A Direction)
