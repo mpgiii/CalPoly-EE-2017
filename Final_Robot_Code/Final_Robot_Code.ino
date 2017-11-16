@@ -120,7 +120,7 @@ void stop() {
   digitalWrite(ENB, LOW);
 }
 
-void FollowLine() {
+void MovingSiren() {
   if (millis() - previousMillisSound >= intervalSound) {     //siren while moving, move tf out of the way
     previousMillisSound = millis();                           //lower pitched to distinguish from setup
     if (Pitch = 400) {
@@ -131,7 +131,9 @@ void FollowLine() {
     }
     tone(piezoPin, Pitch);
   }
+}
 
+void FollowLine() {
   if ((LT1 == LOW) && (LT2 == HIGH) && (LT3 == LOW)) {          //if middle sensor is on and other two off
     forward();
     rememberLastPosition = 1; //1 means on track
@@ -310,20 +312,7 @@ void loop() {
     }
     else {
       stop();
-      if (millis() - previousMillisSound >= intervalSound) {     //STOP IF OBSTACLE DETECTED
-
-        previousMillisSound = millis();     //beep... beep... beep
-        if (Pitch = 400) {
-          Pitch = 300;
-          tone(piezoPin, 600);
-        }
-        if (Pitch = 300) {
-          Pitch = 400;
-          noTone(piezoPin);
-        }
-      }
-      Serial.println(Distance);
-      noTone(piezoPin);
+      MovingSiren();
     }
     delay(1);
   }
