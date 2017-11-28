@@ -317,7 +317,7 @@ void loop() {
 
   if (ObstacleDetected(9.0) == true) {
     PreviousTime = ++PreviousTime;                      //if it's been in front of an obstacle for 15 seconds then play mario theme! :D (to signify we're done)
-    if (PreviousTime > 15000) {
+    if (PreviousTime > 10000) {
       stop();
       DropEgg();
       LittleDiddy();
