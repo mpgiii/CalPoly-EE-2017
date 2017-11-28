@@ -253,7 +253,7 @@ void LittleDiddy() {        //play the mario theme when it's all done :)
   noTone(piezoPin);
 }
 
-void DrogEgg() {
+void DropEgg() {
   for (pos = 25; pos <= 165; pos += 1) {
     servo.write(pos);
     delay(5);
