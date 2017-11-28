@@ -23,6 +23,7 @@ const int ENB = 11; // ENB (PWM or Enable for Motor B)
 const int servoPin = 3; //Servo
 const int LED = 13; //built-in Arduino LED
 const int piezoPin = A3; //buzzer pin
+int pos = 25; //initial servo position
 Servo servo;
 
 unsigned long previousMillisLight = 0;
@@ -252,6 +253,16 @@ void LittleDiddy() {        //play the mario theme when it's all done :)
   noTone(piezoPin);
 }
 
+void DrogEgg() {
+  for (pos = 25; pos <= 165; pos += 1) {
+    servo.write(pos);
+    delay(5);
+    if (pos >= 165) {
+      break;
+    }
+  }
+}
+
 void setup() {
   Serial.begin(9600);
 
@@ -273,7 +284,7 @@ void setup() {
   digitalWrite(motorB1, LOW);
   digitalWrite(motorB2, LOW);
 
-  servo.write(90);          //Make Ultrasonic Sensor look straight ahead
+  servo.write(25);          //Make Ultrasonic Sensor look straight ahead
 
   tone(piezoPin, 700, 500);
   delay(500);
@@ -308,6 +319,7 @@ void loop() {
     PreviousTime = ++PreviousTime;                      //if it's been in front of an obstacle for 15 seconds then play mario theme! :D (to signify we're done)
     if (PreviousTime > 15000) {
       stop();
+      DropEgg();
       LittleDiddy();
     }
     else {
