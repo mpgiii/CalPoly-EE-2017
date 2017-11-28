@@ -122,16 +122,8 @@ void stop() {
 }
 
 void MovingSiren() {
-  if (millis() - previousMillisSound >= intervalSound) {     //siren while moving, move tf out of the way
-    previousMillisSound = millis();                           //lower pitched to distinguish from setup
-    if (Pitch = 400) {
-      Pitch = 300;
-    }
-    if (Pitch = 300) {
-      Pitch = 400;
-    }
-    tone(piezoPin, Pitch);
-  }
+  Pitch = 700;
+  tone(piezoPin, Pitch);
 }
 
 void FollowLine() {
@@ -254,9 +246,9 @@ void LittleDiddy() {        //play the mario theme when it's all done :)
 }
 
 void DropEgg() {
-  for (pos = 25; pos <= 165; pos += 1) {
+  for (pos = 25; pos <= 130; pos += 1) {
     servo.write(pos);
-    delay(5);
+    delay(10);
     if (pos >= 165) {
       break;
     }
@@ -313,17 +305,19 @@ void loop() {
   LT2 = digitalRead(4);
   LT3 = digitalRead(10);
 
-  BlinkLED();
+  
 
   if (ObstacleDetected(9.0) == true) {
-    PreviousTime = ++PreviousTime;                      //if it's been in front of an obstacle for 15 seconds then play mario theme! :D (to signify we're done)
-    if (PreviousTime > 10000) {
-      stop();
+    PreviousTime = ++PreviousTime; 
+    stop();
+                          //if it's been in front of an obstacle for 15 seconds then play mario theme! :D (to signify we're done)
+    if (PreviousTime > 2000) {
+      noTone(piezoPin);
       DropEgg();
       LittleDiddy();
+      delay(10000);
     }
     else {
-      stop();
       MovingSiren();
     }
     delay(1);
@@ -331,6 +325,9 @@ void loop() {
 
   else {
     FollowLine();
+    BlinkLED();
+    noTone(piezoPin);
     delay(50);
   }
+  Serial.println(PreviousTime);
 }
