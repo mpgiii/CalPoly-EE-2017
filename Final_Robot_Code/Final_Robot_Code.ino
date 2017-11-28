@@ -39,14 +39,14 @@ unsigned long EchoDelay = 0; //declare variables
 float Distance = 0.0; //^
 int Pitch = 300; //to make sound with buzzer
 
-int SPEEDY = 90;    //if you wanna change the speeds go for it
-int HARDSPEEDY = 110;
-int TURN = 70;
-int HARDTURN = 40;
+int SPEEDY = 130;    //if you wanna change the speeds go for it
+int HARDSPEEDY = 150;
+int TURN = 110;
+int HARDTURN = 80;
 
 void forward() {
-  analogWrite(ENA, HARDSPEEDY);
-  analogWrite(ENB, HARDSPEEDY);
+  analogWrite(ENA, SPEEDY);
+  analogWrite(ENB, SPEEDY);
   digitalWrite(motorA1, HIGH);
   digitalWrite(motorA2, LOW);
   digitalWrite(motorB1, LOW);
@@ -135,7 +135,7 @@ void FollowLine() {
 
   else if ((LT1 == HIGH) && (LT3 == LOW)) {     //if right sensor
     if (LT2 == HIGH) {                          //middle on
-      right();
+      hardright();
     }
     else {                                      //middle off
       hardright();
@@ -146,7 +146,7 @@ void FollowLine() {
 
   else if ((LT1 == LOW) && (LT3 == HIGH)) {    //if left on
     if (LT2 == HIGH) {                          //and middle on
-      left();
+      hardleft();
     }
     if (LT2 == LOW) {
       hardleft();
@@ -246,10 +246,10 @@ void LittleDiddy() {        //play the mario theme when it's all done :)
 }
 
 void DropEgg() {
-  for (pos = 25; pos <= 130; pos += 1) {
+  for (pos = 25; pos <= 75; pos += 1) {
     servo.write(pos);
     delay(10);
-    if (pos >= 165) {
+    if (pos >= 75) {
       break;
     }
   }
